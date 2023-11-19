@@ -1,6 +1,17 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../hooks/useCart";
+import useAuth from "../../hooks/useAuth";
 
 const NavBar = () => {
+  const { user, logOut } = useAuth();
+  const [cart] = useCart();
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
   const navLink = (
     <>
       <li>
@@ -15,34 +26,47 @@ const NavBar = () => {
       </li>
       <li>
         <NavLink
-          to="/messages"
+          to="/menu"
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active" : ""
           }
         >
-          Messages
+          Our Menu
         </NavLink>
       </li>
       <li>
         <NavLink
-          to="/messages"
+          to="/order/salad"
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active" : ""
           }
         >
-          Messages
+          Order
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/messages"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
-          }
-        >
-          Messages
-        </NavLink>
-      </li>
+      {user ? (
+        <li>
+          <NavLink
+            onClick={handleLogOut}
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "active" : ""
+            }
+          >
+            Sign Out
+          </NavLink>
+        </li>
+      ) : (
+        <li>
+          <NavLink
+            to="/login"
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "active" : ""
+            }
+          >
+            LogIn
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (
@@ -73,14 +97,22 @@ const NavBar = () => {
               {navLink}
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">BISTRO BOSS</a>
+          <a className="btn btn-ghost text-xl font-serif uppercase">
+            BISTRO BOSS
+          </a>
         </div>
         <div className="navbar-end hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
         </div>
-        <div className="">
-          <a className="btn">Button</a>
-        </div>
+        <p className="uppercase text-indigo-500 font-serif font-semibold">{user?.displayName}</p>
+        <Link to="/dashboard/cart" className="indicator">
+          <span className="indicator-item badge badge-secondary">
+            +{cart.length}
+          </span>
+          <button className="btn btn-ghost">
+            <FaShoppingCart className="w-10 h-6"></FaShoppingCart>
+          </button>
+        </Link>
       </div>
     </div>
   );
