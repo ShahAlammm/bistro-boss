@@ -14,8 +14,7 @@ const SocialLogin = () => {
         email: res.user.email,
         name: res.user.displayName,
       };
-      axiosPublic.post("/users", userInfo).then((result) => {
-        console.log(result.data);
+      axiosPublic.post("/users", userInfo).then(() => {
       });
       navigate('/')
     });

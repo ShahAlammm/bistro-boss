@@ -10,6 +10,12 @@ import Dashboard from "../Layout/Dashboard";
 import DashCart from "../Pages/Dashboard/DashCart/DashCart";
 import PrivateRouts from "./PrivateRouts";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AddItems from "../Pages/Dashboard/AddItems/AddItems";
+import AdminRout from "./AdminRout";
+import ManageItem from "../Pages/Dashboard/ManageItem/ManageItem";
+import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -51,11 +57,48 @@ const router = createBrowserRouter([
         path: "cart",
         element: <DashCart></DashCart>,
       },
-
-      // Admin
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      // Admin use only
+      {
+        path: "addItems",
+        element: (
+          <AdminRout>
+            <AddItems></AddItems>
+          </AdminRout>
+        ),
+      },
+      {
+        path: "manageItems",
+        element: (
+          <AdminRout>
+            <ManageItem></ManageItem>
+          </AdminRout>
+        ),
+      },
       {
         path: "users",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRout>
+            <AllUsers></AllUsers>
+          </AdminRout>
+        ),
+      },
+      {
+        path: "updateItem/:id",
+        element: (
+          <AdminRout>
+            <UpdateItem></UpdateItem>
+          </AdminRout>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:8000/menu/${params.id}`),
       },
     ],
   },

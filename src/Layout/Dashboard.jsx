@@ -14,9 +14,13 @@ import {
 } from "react-icons/fa";
 import { ImSpoonKnife } from "react-icons/im";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
-  const isAdmin = {};
+
+  const [isAdmin] = useAdmin();
+
+
   return (
     <div className="flex">
       <div className="w-40 md:w-72 min-h-screen bg-[#D1A054]">
@@ -25,20 +29,21 @@ const Dashboard = () => {
         </h1>
         <ul className="menu md:text-lg font-serif uppercase md:mt-24">
           {isAdmin ? (
-            <>
+            <ul>
               <li className="text-black">
                 <NavLink to="/dashboard/admin">
                   <FaHome className="md:w-7 md:h-10"></FaHome>Admin home
                 </NavLink>
               </li>
               <li className="text-black">
-                <NavLink to="/dashboard/addItem">
-                  <ImSpoonKnife className="md:w-7 md:h-10"></ImSpoonKnife>add items
+                <NavLink to="/dashboard/addItems">
+                  <ImSpoonKnife className="md:w-7 md:h-10"></ImSpoonKnife>add
+                  items
                 </NavLink>
               </li>
               <li className="text-black">
-                <NavLink to="/dashboard/addItem">
-                  <FaListUl className="md:w-7 md:h-10"></FaListUl>add items
+                <NavLink to="/dashboard/manageItems">
+                  <FaListUl className="md:w-7 md:h-10"></FaListUl>manage items
                 </NavLink>
               </li>
               <li className="text-black">
@@ -51,10 +56,9 @@ const Dashboard = () => {
                   <FaUsers className="md:w-7 md:h-10"></FaUsers>All Users
                 </NavLink>
               </li>
-            </>
+            </ul>
           ) : (
-            <>
-              {" "}
+            <ul>
               <li className="text-black">
                 <NavLink to="/dashboard/user">
                   <FaHome className="md:w-7 md:h-10"></FaHome>User Home
@@ -67,7 +71,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li className="text-black">
-                <NavLink to="/dashboard/payment">
+                <NavLink to="/dashboard/paymentHistory">
                   <FaCreditCard className="md:w-7 md:h-10"></FaCreditCard>
                   payment history
                 </NavLink>
@@ -88,7 +92,7 @@ const Dashboard = () => {
                   <FaListAlt className="md:w-7 md:h-10"></FaListAlt>my booking
                 </NavLink>
               </li>
-            </>
+            </ul>
           )}
         </ul>
         {/* Shard  */}

@@ -10,7 +10,7 @@ import useMenu from "../../../hooks/useMenu";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 
 const Menu = () => {
-  const [menu] = useMenu();
+  const {menu} = useMenu();
   const desserts = menu.filter((item) => item.category === "dessert");
   const pizza = menu.filter((item) => item.category === "pizza");
   const salad = menu.filter((item) => item.category === "salad");

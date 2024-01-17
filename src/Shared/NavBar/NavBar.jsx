@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
-  const [cart] = useCart();
+  const {cart} = useCart();
 
   const handleLogOut = () => {
     logOut()
@@ -59,6 +59,7 @@ const NavBar = () => {
         <li>
           <NavLink
             to="/login"
+            onClick={handleLogOut}
             className={({ isActive, isPending }) =>
               isPending ? "pending" : isActive ? "active" : ""
             }

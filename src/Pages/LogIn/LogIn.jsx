@@ -31,9 +31,7 @@ const LogIn = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    signIn(email, password).then((res) => {
-      console.log(res.user);
-
+    signIn(email, password).then(() => {
       Swal.fire({
         title: "Custom animation with Animate.css",
         showClass: {

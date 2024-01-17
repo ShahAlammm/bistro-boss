@@ -11,10 +11,11 @@ const Testimonials = () => {
   const [reviews, setReview] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/review")
+    fetch("http://localhost:8000/reviews")
       .then((res) => res.json())
       .then((data) => setReview(data));
   }, []);
+  
   return (
     <div className="lg:mt-24 my-20">
       <SectionTitle

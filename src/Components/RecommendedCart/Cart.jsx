@@ -9,7 +9,7 @@ const Cart = ({ item }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosSecure = useAxios();
-  const [, refetch] = useCart();
+  const {refetch} = useCart();
 
   const { user } = useAuth();
 
@@ -53,9 +53,9 @@ const Cart = ({ item }) => {
   };
   return (
     <div className="mb-24 m-auto">
-      <div className="card rounded-none  lg:w-96 bg-[#F3F3F3] shadow-xl shadow-cyan-600">
+      <div className="card rounded-none w-full md:w-96 bg-[#F3F3F3] shadow-xl shadow-cyan-600">
         <figure>
-          <img src={image} className="w-full " />
+          <img src={image} className="w-full h-80" />
         </figure>
         <p className="absolute right-0 bg-slate-900 mr-4 mt-4 px-2 text-white">
           ${price}

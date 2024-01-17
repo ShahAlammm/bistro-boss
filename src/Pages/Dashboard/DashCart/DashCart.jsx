@@ -3,9 +3,10 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
 import useAxios from "../../../hooks/useAxios";
+import { Link } from "react-router-dom";
 
 const DashCart = () => {
-  const [cart, refetch] = useCart();
+  const {cart, refetch} = useCart();
   const axiosSecure = useAxios();
 
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
@@ -44,7 +45,15 @@ const DashCart = () => {
         <div className="flex justify-evenly">
           <h2 className="text-3xl">Total Items: {cart.length}</h2>
           <h2 className="text-3xl">Total Price: {totalPrice}$</h2>
-          <button className="btn bg-[#D1A054] text-slate-800">pay</button>
+          {cart.length ? (
+            <Link to={"/dashboard/payment"}>
+              <button className="btn bg-[#D1A054] text-slate-800">pay</button>
+            </Link>
+          ) : (
+            <button disabled className="btn bg-[#D1A054] text-slate-800">
+              pay
+            </button>
+          )}
         </div>
         <div>
           <div className="overflow-x-auto rounded-xl mt-6">
